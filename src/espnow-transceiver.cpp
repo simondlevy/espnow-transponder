@@ -19,8 +19,6 @@
 
 static uint8_t _peer_address[6];
 
-static HardwareSerial * _serial;
-
 static void OnDataRecv(
         const uint8_t * mac, const uint8_t * data, int len)
 {
@@ -61,4 +59,12 @@ void EspNowTransceiver::send(const uint8_t * data, const uint8_t len)
     if (!esp_now_send(_peer_address, data, len) == ESP_OK) {
         Serial.println("Error sending the data");
     }
+}
+
+void EspNowTransceiver::step(HardwareSerial & serial)
+{
+    const auto avail = serial.available();
+    uint8_t buf[256] = {};
+    serial.read(buf, avail);
+    send(buf, avail);
 }

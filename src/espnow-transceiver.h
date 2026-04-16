@@ -27,6 +27,8 @@ class EspNowTransceiver {
           * You should implement this method for your application.
           */
          static void recv(const uint8_t * data, const uint8_t len);
+
+         static void step(HardwareSerial & serial);
 };
 
 
