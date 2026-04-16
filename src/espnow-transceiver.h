@@ -13,7 +13,7 @@
 
 #include <Arduino.h>
 
-class EspNow2Serial {
+class EspNowTransceiver {
 
     public:
 
