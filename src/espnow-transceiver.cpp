@@ -19,6 +19,8 @@
 
 static uint8_t _peer_address[6];
 
+static HardwareSerial * _serial;
+
 static void OnDataRecv(
         const uint8_t * mac, const uint8_t * data, int len)
 {
@@ -32,9 +34,13 @@ static void reportForever(const char * msg)
     delay(500);
 }
 
-void EspNowTransceiver::begin(const uint8_t peer_address[6]) 
+void EspNowTransceiver::begin(
+        const uint8_t peer_address[6],
+        HardwareSerial * serial)
 {
     memcpy(_peer_address, peer_address, 6);
+
+    _serial = serial;
 
     WiFi.mode(WIFI_STA);
 
@@ -61,10 +67,10 @@ void EspNowTransceiver::send(const uint8_t * data, const uint8_t len)
     }
 }
 
-void EspNowTransceiver::step(HardwareSerial & serial)
+void EspNowTransceiver::step()
 {
-    const auto avail = serial.available();
+    const auto avail = _serial->available();
     uint8_t buf[256] = {};
-    serial.read(buf, avail);
+    _serial->read(buf, avail);
     send(buf, avail);
 }

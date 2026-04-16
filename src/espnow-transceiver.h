@@ -16,7 +16,8 @@ class EspNowTransceiver {
         /**
           * Initiate ESPNOW communication with device at specified address.
           */
-        static void begin(const uint8_t peer_address[6]);
+        static void begin(
+                const uint8_t peer_address[6], HardwareSerial * serial);
 
         /**
           * Send data to the peer device.
@@ -28,7 +29,7 @@ class EspNowTransceiver {
           */
          static void recv(const uint8_t * data, const uint8_t len);
 
-         static void step(HardwareSerial & serial);
+         static void step();
 };
 
 
