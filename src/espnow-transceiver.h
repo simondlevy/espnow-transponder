@@ -1,9 +1,5 @@
 /*
-   Copyright (C) 2026 Simon D. Levy
-
-   Adapted from: 
-
-     https://RandomNerdTutorials.com/esp-now-two-way-communication-esp32 
+  Copyright (C) 2026 Simon D. Levy
 
   Permission is hereby granted, free of charge, to any person obtaining a
   copy of this software and associated documentation files.  .  The above
@@ -31,7 +27,6 @@ class EspNowTransceiver {
           * You should implement this method for your application.
           */
          static void recv(const uint8_t * message, const uint8_t len);
-
 };
 
 
