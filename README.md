@@ -1,2 +1,2 @@
-# espnow2serial
-Arduino library for ESPNOW / Serial relay
+# espnow-transceiver
+Arduino library for ESPNOW send/receive
