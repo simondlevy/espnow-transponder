@@ -25,7 +25,8 @@ static void OnDataRecv(
         const uint8_t * mac, const uint8_t * data, int len)
 {
     (void)mac;
-    EspNowTransceiver::recv(data, len);
+
+    _serial->write(data, len);
 }
 
 static void reportForever(const char * msg)

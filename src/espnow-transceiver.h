@@ -25,11 +25,9 @@ class EspNowTransceiver {
         static void send(const uint8_t * data, const uint8_t len);
 
         /**
-          * You should implement this method for your application.
+          * You should call this in your loop().
           */
-         static void recv(const uint8_t * data, const uint8_t len);
-
-         static void step();
+          static void step();
 };
 
 
