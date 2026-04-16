@@ -56,9 +56,9 @@ void EspNowTransceiver::begin(const uint8_t peer_address[6])
     esp_now_register_recv_cb(esp_now_recv_cb_t(OnDataRecv));
 }
 
-void EspNowTransceiver::send(const uint8_t * message, const uint8_t len)
+void EspNowTransceiver::send(const uint8_t * data, const uint8_t len)
 {
-    if (!esp_now_send(_peer_address, message, len) == ESP_OK) {
+    if (!esp_now_send(_peer_address, data, len) == ESP_OK) {
         Serial.println("Error sending the data");
     }
 }

@@ -21,12 +21,12 @@ class EspNowTransceiver {
         /**
           * Send data to the peer device.
           */
-        static void send(const uint8_t * message, const uint8_t len);
+        static void send(const uint8_t * data, const uint8_t len);
 
         /**
           * You should implement this method for your application.
           */
-         static void recv(const uint8_t * message, const uint8_t len);
+         static void recv(const uint8_t * data, const uint8_t len);
 };
 
 
