@@ -9,23 +9,20 @@
 
 #include <Arduino.h>
 
-class EspNowTransceiver {
+class EspNowTransponder {
 
     public:
 
         /**
-          * Initiate ESPNOW communication with device at specified address.
+          * Initiate ESPNOW communication with device at specified address,
+          * using the specified serial port.
           */
         static void begin(
-                const uint8_t peer_address[6], HardwareSerial * serial);
+                const uint8_t peer_address[6],
+                HardwareSerial * serial);
 
         /**
-          * Send data to the peer device.
-          */
-        static void send(const uint8_t * data, const uint8_t len);
-
-        /**
-          * You should call this in your loop().
+          * Call this in your loop().
           */
           static void step();
 };

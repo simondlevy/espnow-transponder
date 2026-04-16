@@ -15,7 +15,7 @@
 #include <esp_now.h>
 #include <WiFi.h>
 
-#include "espnow-transceiver.h"
+#include "espnow-transponder.h"
 
 static uint8_t _peer_address[6];
 
@@ -35,7 +35,7 @@ static void reportForever(const char * msg)
     delay(500);
 }
 
-void EspNowTransceiver::begin(
+void EspNowTransponder::begin(
         const uint8_t peer_address[6],
         HardwareSerial * serial)
 {
@@ -61,17 +61,15 @@ void EspNowTransceiver::begin(
     esp_now_register_recv_cb(esp_now_recv_cb_t(OnDataRecv));
 }
 
-void EspNowTransceiver::send(const uint8_t * data, const uint8_t len)
-{
-    if (!esp_now_send(_peer_address, data, len) == ESP_OK) {
-        Serial.println("Error sending the data");
-    }
-}
-
-void EspNowTransceiver::step()
+void EspNowTransponder::step()
 {
     const auto avail = _serial->available();
-    uint8_t buf[256] = {};
-    _serial->read(buf, avail);
-    send(buf, avail);
+
+    uint8_t data[256] = {};
+
+    _serial->read(data, avail);
+
+    if (esp_now_send(_peer_address, data, avail) != ESP_OK) {
+        Serial.println("Error sending the data");
+    }
 }
