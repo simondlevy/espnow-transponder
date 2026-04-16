@@ -17,12 +17,21 @@ class EspNow2Serial {
 
     public:
 
-        static void begin(
-                const uint8_t peer_address[6], 
-                HardwareSerial * serial=&Serial,
-                const uint32_t baud=115200);
+        /**
+          * Initiate ESPNOW communication with device at specified address.
+          */
+        static void begin(const uint8_t peer_address[6]);
 
+        /**
+          * Send data to the peer device.
+          */
         static void send(const uint8_t * message, const uint8_t len);
+
+        /**
+          * You should implement this method for your application.
+          */
+         static void recv(const uint8_t * message, const uint8_t len);
+
 };
 
 

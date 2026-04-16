@@ -19,12 +19,13 @@
 
 static uint8_t _peer_address[6];
 
+static HardwareSerial * _serial;
+
 static void OnDataRecv(
         const uint8_t * mac, const uint8_t * data, int len)
 {
     (void)mac;
-    Serial.print("Bytes received: ");
-    Serial.println(len);
+    EspNow2Serial::recv(data, len);
 }
 
 static void reportForever(const char * msg)
@@ -33,14 +34,9 @@ static void reportForever(const char * msg)
     delay(500);
 }
 
-void EspNow2Serial::begin(
-        const uint8_t peer_address[6], 
-        HardwareSerial * serial,
-        const uint32_t baud)
+void EspNow2Serial::begin(const uint8_t peer_address[6]) 
 {
     memcpy(_peer_address, peer_address, 6);
-
-    serial->begin(baud);
 
     WiFi.mode(WIFI_STA);
 
@@ -57,7 +53,6 @@ void EspNow2Serial::begin(
         reportForever("Failed to add peer");
     }
 
-    // Register for a callback function that will be called when data is received
     esp_now_register_recv_cb(esp_now_recv_cb_t(OnDataRecv));
 }
 
