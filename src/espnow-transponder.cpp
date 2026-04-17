@@ -65,11 +65,14 @@ void EspNowTransponder::step()
 {
     const auto avail = _serial->available();
 
-    uint8_t data[256] = {};
+    if (avail > 0) {
 
-    _serial->read(data, avail);
+        uint8_t data[256] = {};
 
-    if (esp_now_send(_peer_address, data, avail) != ESP_OK) {
-        Serial.println("Error sending the data");
+        _serial->read(data, avail);
+
+        if (esp_now_send(_peer_address, data, avail) != ESP_OK) {
+            Serial.println("Error sending the data");
+        }
     }
 }
